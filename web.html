@@ -1,0 +1,1344 @@
+<div class="header"></div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HACKWITHINDIA SRMIST Chapter Recruitment</title>
+    <style>
+        :root {
+            --primary-color: #ff40b3;
+            --bg-dark: #07071a;
+            --form-bg: #111129;
+            --text-color: #ffffff;
+            --input-bg: rgba(255, 255, 255, 0.1);
+            --input-border: rgba(255, 255, 255, 0.2);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .contact-us-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff40b3, #6d07a7);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 64, 179, 0.4);
+            z-index: 1000;
+        }
+
+        .contact-us-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 64, 179, 0.6);
+        }
+
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--form-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            color: var(--text-color);
+        }
+
+        .popup.active {
+            display: block;
+        }
+        /* Landing Page Styles */
+        .landing-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #1a0b2e 0%, #07071a 100%);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.8s ease-out;
+        }
+        
+        .landing-content {
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .landing-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #ff40b3, #6d07a7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 64, 179, 0.3);
+        }
+        
+        .landing-description {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .apply-btn {
+            background: linear-gradient(135deg, #ff40b3, #6d07a7);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 64, 179, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .apply-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 64, 179, 0.6);
+        }
+        
+        .apply-btn::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+        
+        .apply-btn:hover::after {
+            opacity: 1;
+            transform: rotate(45deg) translateX(50%) translateY(-50%);
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: linear-gradient(135deg, #ff40b3, #6d07a7);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 8s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Logo Styles */
+        .logo-container {
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #6d07a7, #ff40b3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(109, 7, 167, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: skewX(-25deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -150%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+        
+        .logo h1 {
+            color: white;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        
+        /* Form Page Styles */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            display: none;
+        }
+        
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #6d07a7, #ff40b3);
+            padding: 40px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header h1 {
+            margin: 0 0 15px 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            margin: 0 0 20px 0;
+            opacity: 0.8;
+        }
+        
+        .btn {
+            background-color: white;
+            color: #6d07a7;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-container {
+            background-color: var(--form-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px 15px -10px;
+        }
+        
+        .form-group {
+            flex: 1 1 300px;
+            margin: 0 10px 15px 10px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
+        
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(17, 17, 41, 0.8);
+            border-radius: 50px;
+            padding: 10px;
+            display: none;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .audio-controls button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 18px;
+            margin: 0 5px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .audio-controls button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .volume-control {
+            width: 80px;
+            margin: 0 10px;
+        }
+        
+        .slide-up {
+            transform: translateY(-100vh);
+            position: absolute; 
+            width: 100%;
+            z-index: -1; 
+        }
+        .divider {
+            width: 100%;
+            height: 2px;
+            background: purple;
+            margin: 20px 0;
+            box-shadow: 0px 0px 10px purple;
+        }
+
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(7, 7, 26, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .loading.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 64, 179, 0.3);
+            border-radius: 50%;
+            border-top-color: #ff40b3;
+            animation: spin 1s infinite linear;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .thank-you-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #1a0b2e 0%, #07071a 100%);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.8s ease-out;
+}
+        
+        @media (max-width: 768px) {
+            .landing-title {
+                font-size: 2.5rem;
+            }
+            
+            .form-group {
+                flex: 1 1 100%;
+            }
+            
+            .header {
+                padding: 30px 15px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .form-container {
+                padding: 20px 15px;
+                
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="contact-us-btn" id="contact-us-btn">Contact Us</button>
+
+    <div class="popup" id="popup">
+        <p>Please Contact Us if you cannot see your branch! - +91 70433 88006 or +91 88248 49327</p>
+    </div>
+    <div class="landing-page" id="landing-page">
+        <div class="particles" id="particles"></div>
+        <div class="landing-content">
+            <div class="logo-container">
+                <div class="logo">
+                    <h1>HWI</h1>
+                </div>
+            </div>
+            <h1 class="landing-title">HACKWITHINDIA</h1>
+            <p class="landing-description">Join the SRMIST Chapter and be a part of something extraordinary! We're looking for talented individuals to join our growing community.</p>
+            <button class="apply-btn" id="apply-btn">Apply Now</button>
+        </div>
+        <img src="D:\Coding\Python\Website\HWI-Page\saveicon.png" alt="Logo" style="position: absolute; top: 10px; right: 10px; width: 50px; height: 50px;">
+    </div>
+    
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+    
+    <!-- Form Page -->
+    <div class="container" id="form-container">
+        <div class="header">
+            <h1>The Easiest Way<br>to join the coolest club</h1>
+            <p>HACKWITHINDIA SRMIST Chapter has opened their Recruitment!, apply today to become a part of us</p>
+            <button class="btn" id="scroll-to-form">Apply Below!</button>
+            <img src="D:\Coding\Python\Website\HWI-Page\saveicon.png" alt="Logo" style="position: absolute; top: 10px; right: 10px; width: 50px; height: 50px;">
+        </div>
+        
+        <div class="form-container">
+            <div class="section">
+                <div class="section-title" style="font-size: 35px;">Recruitment Form</div>
+                <div class="divider"></div>
+                
+                <div class="section">
+                    <div class="section-title" style="color: #9378c7; font-weight: bold;">Personal Details</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName" class="required-field">Full Name </label>
+                            <input type="text" id="fullName" placeholder="Enter Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="regNumber" class="required-field">Full Registration Number *</label>
+                            <input type="text" id="regNumber" placeholder="RA...." required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="personalEmail" class="required-field">Personal Email ID</label>
+                            <input type="email" id="personalEmail" placeholder="Enter Personal Email ID" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="officialEmail" class="required-field">Official Email ID</label>
+                            <input type="email" id="officialEmail" placeholder="Enter Official Email ID" required>
+                            <small id="officialEmailError" style="color: red; display: none;">Official email must contain @srmist.edu.in</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone" class="required-field">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="Enter your phone number" pattern="\d{10}" required>
+                            <div id="phoneError" style="color: red; display: none;">Please enter a valid 10-digit number.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="whatsapp" class="required-field">Whatsapp Contact Number</label>
+                            <input type="tel" id="whatsapp" placeholder="Whatsapp Contact" pattern="\d{10}" required>
+                            <div id="whatsappError" style="color: red; display: none;">Please enter a valid 10-digit number.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="currentYear" class="required-field">Year</label>
+                            <select id="currentYear" required>
+                                <option value="" disabled selected>Select Year</option>
+                                <option value="1st" style="color: #000000;">1</option>
+                                <option value="2nd "style="color: #000000;">2</option>
+                                <option value="3rd " style="color: #000000;">3</option>
+                                <option value="4th " style="color: #000000;">4</option>
+                            </select>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="course" class="required-field">Course</label>
+                            <select id="course" onchange="updateBranches()" required>
+                                <option value="" disabled selected>Select your Course</option>
+                                <option value="btech" style="color: #000000;">B.Tech</option>
+                                <option value="bca" style="color: #000000;">BCA</option>
+                                <option value="mca" style="color: #000000;">MCA</option>
+                                <option value="bba" style="color: #000000;">BBA</option>
+                                <option value="mba" style="color: #000000;">MBA</option>
+                                <option value="pharma" style="color: #000000;">B.Pharma</option>
+                                <option value="bsc" style="color: #000000;">B.Sc</option>
+                                <option value="hotel" style="color: #000000;">Hotel Management</option>
+                                <option value="phd" style="color: #000000;">PhD</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="branch" class="required-field">Branch</label>
+                            <select id="branch" onchange="updatesp()" required>
+                                <option value="" disabled selected>Select your Branch.</option>
+                            </select>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="specialization" class="required-field">Specialization</label>
+                            <select id="specialization" required>
+                                <option value="" disabled selected>Select your Specialization.</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title" style="color: #9378c7;">Team Preferences</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="preferredTeam1" class="required-field">Preferred Team (Primary)</label>
+                            <select id="preferredTeam1" required>
+                                <option value="" disabled selected>Select Team</option>
+                                <option value="technical" style="color: #000000;">Technical Team</option>
+                                <option value="design" style="color: #000000;">Design Team</option>
+                                <option value="editing" style="color: #000000;">Editing Team</option>
+                                <option value="event" style="color: #000000;">Event Management Team</option>
+                                <option value="sponsorship" style="color: #000000;">Sponsorship and PR Team</option>
+                                <option value="social" style="color: #000000;">Social Media Team</option>
+                                <option value="content" style="color: #000000;">Content Team</option>
+
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="preferredTeam2">Preferred Team (Secondary)</label>
+                            <select id="preferredTeam2">
+                                <option value="" disabled selected>Select Team</option>
+                                <option value="technical" style="color: #000000;">Technical Team</option>
+                                <option value="design" style="color: #000000;">Design Team</option>
+                                <option value="editing" style="color: #000000;">Editing Team</option>
+                                <option value="event" style="color: #000000;">Event Management Team</option>
+                                <option value="sponsorship" style="color: #000000;">Sponsorship and PR Team</option>
+                                <option value="social" style="color: #000000;">Social Media Team</option>
+                                <option value="content" style="color: #000000;">Content Team</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="skills" class="required-field">Skills *</label>
+                            <input type="text" id="skills" placeholder="Enter your technical Skills" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reason" class="required-field">Reason for Joining *</label>
+                            <textarea id="reason" placeholder="Why do you want to join HWI-SRM Chapter?" required></textarea>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                </div>
+                
+                <div id="additional-preferences">
+                    <div class="section" id="technical-team" style="display: none;">
+                        <div class="section-title">Technical Team
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="techRole" class="required-field">Tech Team Sub-Group *</label>
+                                <select id="techRole" required>
+                                    <option value="" disabled selected>Select a Team Sub Group</option>
+                                    <option value="web3" style="color: #000000;">Web3 Development</option>
+                                    <option value="webd" style="color: #000000;">Web Development</option>
+                                    <option value="appd" style="color: #000000;">App Development</option>
+                                    <option value="aiml" style="color: #000000;">AIML Development</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="portfolioLink" >Portfolio Link</label>
+                                <input type="url" id="portfolioLink" placeholder="Enter Portfolio Link">
+                            </div>
+                            <div class="form-group">
+                                <label for="resumeLink" class="required-field">Resume link *</label>
+                                <input type="url" id="resumeLink" placeholder="Enter your Resume Link" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="githubLink" class="required-field">Github Profile Link *</label>
+                                <input type="url" id="githubLink" placeholder="Enter Github Profile Link" required>
+                                <div id="githubLinkError" style="color: red; display: none;">Enter a valid GitHub link.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="linkedinLink" class="required-field">Linkedin Profile Link *</label>
+                                <input type="url" id="linkedinLink" placeholder="Enter Linkedin Profile Link" required>
+                                <div id="linkedinLinkError" style="color: red; display: none;">Enter a valid LinkedIn link.</div>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                    </div>
+                    
+                    <!-- Design Team -->
+                    <div class="section" id="design-team" style="display: none;">
+                        <div class="section-title">Design Team</div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="required-field">Design Software *</label>
+                                <div>
+                                    <input type="checkbox" id="figma" name="designsoft" value="figma">
+                                    <label for="figma">Figma</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="canva" name="designsoft" value="canva">
+                                    <label for="canva">Canva</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="adobe" name="designsoft" value="adobe">
+                                    <label for="adobe">Adobe XD</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="photoshop" name="designsoft" value="photoshop">
+                                    <label for="photoshop">Photoshop</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="portfolioLinkDesign">Portfolio Link</label>
+                                <input type="url" id="portfolioLinkDesign" placeholder="Enter Portfolio Link">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="designSamples" class="required-field">Design Samples *</label>
+                                <textarea id="designSamples" placeholder="Enter Links to Design Samples" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section" id="editing-team" style="display: none;">
+                        <div class="section-title">Editing Team</div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="required-field">Editing Software *</label>
+                                <div>
+                                    <input type="checkbox" id="premiere-pro" name="editsoft" value="premiere-pro">
+                                    <label for="premiere-pro">Adobe Premiere Pro</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="resolve" name="editsoft" value="resolve">
+                                    <label for="resolve">DaVinci Resolve</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="filmora" name="editsoft" value="filmora">
+                                    <label for="filmora">Wondershare Filmora</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="mobile-editors" name="editsoft" value="mobile-editors">
+                                    <label for="mobile-editors">Mobile Editors (Clipcut, VN, etc.)</label>
+                                </div>
+                            </div>
+                        </div>
+                            
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="portfolioLinkEditing">Portfolio Link</label>
+                                <input type="url" id="portfolioLinkEditing" placeholder="Enter Portfolio Link">
+                            </div>
+                        </div>
+                            
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="editingSamples" class="required-field">Editing Samples *</label>
+                                <textarea id="editingSamples" placeholder="Enter Links to Edited Samples" required></textarea>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="divider"></div>
+                    </div>
+                    
+                    <div class="section" id="social-team" style="display: none;">
+                        <div class="section-title">Social Media Team</div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="twitterLink" class="required-field">Portfolio</label>
+                                <input type="url" id="twitterLink" placeholder="Enter Portfolio Link">
+                            </div>
+                            <div class="form-group">
+                                <label for="linkedinLinkSocial" class="required-field">Linkedin Profile *</label>
+                                <input type="url" id="linkedinLinkSocial" placeholder="Enter your Linkedin Profile Link" required>
+                                <div id="linkError" style="color: red; display: none;">Enter a valid LinkedIn link.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contentSamples" class="required-field">X/Twitter Link *</label>
+                                <input type="text" id="contentSamples" placeholder="Enter X/Twitter Profile Link" required>
+                                <div id="linkError" style="color: red; display: none;">Enter a valid X.com link.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileLinks" class="required-field">Instagram Link *</label>
+                                <input type="text" id="profileLinks" placeholder="Enter your Instagram Profile Link" required>
+                                <div id="linkError" style="color: red; display: none;">Enter a valid Instagram link.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="skills" class="required-field">Discord</label>
+                                <input type="text" id="skills" placeholder="Enter your Discord Profile Link" required>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                    </div>
+                    
+                    <!-- Content Writing Team -->
+                    <div class="section" id="content-team" style="display: none;">
+                        <div class="section-title">Content Writing Team</div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="portfolioLinkContent">Portfolio</label>
+                                <input type="url" id="portfolioLinkContent" placeholder="Enter Portfolio Link">
+                            </div>
+                            <div class="form-group">
+                                <label for="linkedinLinkContent" class="required-field">Linkedin Profile *</label>
+                                <input type="url" id="linkedinLinkContent" placeholder="Enter your Linkedin Profile Link" required>
+                                <div id="linkError" style="color: red; display: none;">Enter a valid LinkedIn link.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contentSamplesContent" class="required-field">X/Twitter Link *</label>
+                                <input type="text" id="contentSamplesContent" placeholder="Enter X/Twitter Profile Link" required>
+                                <div id="linkError" style="color: red; display: none;">Enter a valid X.com link.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileLinksContent" class="required-field">Instagram Link *</label>
+                                <input type="text" id="profileLinksContent" placeholder="Enter your Instagram Profile Link" required>
+                                <div id="linkError" style="color: red; display: none;">Enter a valid Instagram link.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="writingSamplesContent" class="required-field">Content Samples *</label>
+                                <textarea id="writingSamplesContent" placeholder="Link(s) to content samples [articles, blog, posts etc]" required></textarea>
+                            </div>
+                        </div>
+                        
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+                        
+        <div class="form-row">
+            <div class="form-group" style="text-align: center;">
+                <button type="submit" class="apply-btn">Submit Application</button>
+            </div>
+        </div>
+
+        <div class="thank-you-page" id="thank-you-page" style="display: none;">
+            <div class="landing-content">
+                <div class="logo-container">
+                    <div class="logo">
+                        <h1>HWI</h1>
+                    </div>
+                </div>
+                <h1 class="landing-title">Thank You!</h1>
+                <p class="landing-description">We have received your application. We will reach out to you shortly.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Audio Control Panel -->
+    <div class="audio-controls" id="audio-controls">
+        <button id="mute-btn">🔊</button>
+        <input type="range" min="0" max="100" value="70" class="volume-control" id="volume-control">
+        <button id="stop-btn">⏹️</button>
+    </div>
+    
+    <!-- Audio Element -->
+    <audio id="background-music" loop>
+        <source src="https://assets.codepen.io/25496/Ikson+-+New+Day.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactUsBtn = document.getElementById('contact-us-btn');
+            const popup = document.getElementById('popup');
+
+            contactUsBtn.addEventListener('click', function() {
+                popup.classList.toggle('active');
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target === popup) {
+                    popup.classList.remove('active');
+                }
+            });
+        });
+
+        function validateNumber(input, errorElementId) {
+            const numberValue = input.value.trim();
+            const errorElement = document.getElementById(errorElementId);
+            if (numberValue && !/^\d{10}$/.test(numberValue)) {
+                errorElement.style.display = 'block';
+                input.setCustomValidity('Please enter a valid 10-digit number.');
+            } else {
+                errorElement.style.display = 'none';
+                input.setCustomValidity('');
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('recruitment-form');
+            const thankYouPage = document.getElementById('thank-you-page');
+            const formContainer = document.getElementById('form-container');
+        
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+        
+                if (!this.checkValidity()) {
+                    alert('Please fill out all required fields correctly.');
+                    return;
+                }
+        
+        
+                localStorage.setItem('formData', JSON.stringify(formData));
+                formContainer.style.display = 'none';
+                thankYouPage.style.display = 'flex';
+                window.scrollTo(0, 0);
+            });
+        });
+                function updatesp(){
+                    const specializationSelect = document.getElementById('specialization');
+                    const branchSelect = document.getElementById('branch').value;
+                    const specialization = {
+                        cse: ["Core", "AI & ML", "Cyber Security", "Data Science", "Cloud Computing", "IoT"],
+                        ece: ["Core"],
+                        mechanical: ["Core"],
+                        civil: ["Core"],
+                        it: ["Core"],
+                        general: ["General"],
+                        data_science: ["General"],
+                        chemistry: ["General"],
+                        physics: ["General"],
+                        mathematics: ["General"],
+                        phd_in_pharmacy: ["General"],
+                        phd_computer_science_applications: ["General"],
+                        phd_management: ["General"],
+                        phd_engineering: ["General"],
+                        automobile: ["Core"],
+                        csbs: ["Core"]
+                    };
+                    specializationSelect.innerHTML = '<option value="" disabled selected>Select your Specialization.</option>';
+                    if (specialization[branchSelect]) {
+                        specialization[branchSelect].forEach(specialization => {
+                            let option = document.createElement("option");
+                            option.value = specialization.toLowerCase().replace(/\s+/g, "_");
+                            option.textContent = specialization;
+                            option.style.color = "#000000";
+                            specializationSelect.appendChild(option);
+                        });
+                    }
+                }
+
+        
+                function updateBranches(){
+                    const branchSelect = document.getElementById('branch');
+                    const courseSelect = document.getElementById('course').value;
+                    const branches = {
+                        btech: ["CSE", "ECE", "Mechanical", "Civil", "IT", "Automobile", "CSBS"],
+                        bca: ["General", "Data Science"],
+                        mca: ["General"],
+                        bba: ["General"],
+                        mba: ["General"],
+                        pharma: ["General"],
+                        bsc: ["Physics", "Chemistry", "Mathematics"],
+                        hotel: ["General"],
+                        phd: ["PhD_in_Pharmacy", "PhD_Computer_Science_Applications", "PhD_Management", "PhD_Engineering"]
+                    };
+        
+                    branchSelect.innerHTML = '<option value="" disabled selected>Select your Branch.</option>';
+        
+                    if (branches[courseSelect]) {
+                        branches[courseSelect].forEach(branch => {
+                            let option = document.createElement("option");
+                            option.value = branch.toLowerCase().replace(/\s+/g, "_");
+                            option.textContent = branch;
+                            option.style.color = "#000000";
+                            branchSelect.appendChild(option);
+                        });
+                    }
+                }
+                document.addEventListener('DOMContentLoaded', function() {
+            const officialEmailInput = document.getElementById('officialEmail');
+            const officialEmailError = document.getElementById('officialEmailError');
+        
+            officialEmailInput.addEventListener('blur', function() {
+                const email = officialEmailInput.value.trim();
+                if (email && !email.includes('@srmist.edu.in')) {
+                    officialEmailError.style.display = 'block';
+                    officialEmailInput.setCustomValidity('Official email must contain @srmist.edu.in');
+                } else {
+                    officialEmailError.style.display = 'none';
+                    officialEmailInput.setCustomValidity('');
+                }
+            });
+        
+            document.addEventListener('DOMContentLoaded', function () {
+            const githubLinkInput = document.getElementById('githubLink');
+            const linkedinLinkInput = document.getElementById('linkedinLink');
+            const githubLinkError = document.getElementById('githubLinkError');
+            const linkedinLinkError = document.getElementById('linkedinLinkError');
+        
+            const allowedDomains = ['github.com', 'linkedin.com', 'instagram.com', 'x.com'];
+        
+            function validateLink(input, errorElement) {
+                const linkValue = input.value.trim();
+                try {
+                    const url = new URL(linkValue);
+                    if (!allowedDomains.some(domain => url.hostname.includes(domain))) {
+                        errorElement.style.display = 'block';
+                        input.setCustomValidity('Enter a valid GitHub, LinkedIn, Instagram, or X.com link.');
+                    } else {
+                        errorElement.style.display = 'none';
+                        input.setCustomValidity('');
+                    }
+                } catch (e) {
+                    errorElement.style.display = 'block';
+                    input.setCustomValidity('Enter a valid URL.');
+                }
+            }
+        
+            // Validate GitHub link on blur
+            githubLinkInput.addEventListener('blur', function () {
+                validateLink(githubLinkInput, githubLinkError);
+            });
+        
+            // Validate LinkedIn link on blur
+            linkedinLinkInput.addEventListener('blur', function () {
+                validateLink(linkedinLinkInput, linkedinLinkError);
+            });
+        
+            // Validate links on form submission
+            const form = document.querySelector('.form-container');
+            form.addEventListener('submit', function (event) {
+                validateLink(githubLinkInput, githubLinkError);
+                validateLink(linkedinLinkInput, linkedinLinkError);
+        
+                if (!githubLinkInput.checkValidity() || !linkedinLinkInput.checkValidity()) {
+                    event.preventDefault(); // Prevent form submission if links are invalid
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactUsBtn = document.getElementById('contact-us-btn');
+            const popup = document.getElementById('popup');
+
+            contactUsBtn.addEventListener('click', function() {
+                popup.classList.toggle('active');
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target === popup) {
+                    popup.classList.remove('active');
+                }
+            });
+        });
+        
+        
+        const instagramLinkInput = document.getElementById('instagramLink');
+        const xLinkInput = document.getElementById('xLink');
+        const instagramLinkError = document.getElementById('instagramLinkError');
+        const xLinkError = document.getElementById('xLinkError');
+        
+        instagramLinkInput.addEventListener('blur', function () {
+            validateLink(instagramLinkInput, instagramLinkError);
+        });
+        
+        xLinkInput.addEventListener('blur', function () {
+            validateLink(xLinkInput, xLinkError);
+        });
+        
+        form.addEventListener('submit', function (event) {
+            validateLink(instagramLinkInput, instagramLinkError);
+            validateLink(xLinkInput, xLinkError);
+        
+            if (!instagramLinkInput.checkValidity() || !xLinkInput.checkValidity()) {
+                event.preventDefault();
+            }
+        });
+        
+        
+            document.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.getElementById('phone');
+            const whatsappInput = document.getElementById('whatsapp');
+            const phoneError = document.getElementById('phoneError');
+            const whatsappError = document.getElementById('whatsappError');
+        
+            function validateNumber(input, errorElementId) {
+                const numberValue = input.value.trim();
+                const errorElement = document.getElementById(errorElementId);
+                if (numberValue && !/^\d{10}$/.test(numberValue)) {
+                    errorElement.style.display = 'block';
+                    input.setCustomValidity('Please enter a valid 10-digit number.');
+                } else {
+                    errorElement.style.display = 'none';
+                    input.setCustomValidity('');
+                }
+            }
+        
+            phoneInput.addEventListener('blur', function() {
+                validateNumber(phoneInput, phoneError);
+            });
+        
+            whatsappInput.addEventListener('blur', function() {
+                validateNumber(whatsappInput, whatsappError);
+            });
+        
+            const form = document.querySelector('.form-container');
+            form.addEventListener('submit', function(event) {
+                validateNumber(phoneInput, phoneError);
+                validateNumber(whatsappInput, whatsappError);
+        
+                if (!phoneInput.checkValidity() || !whatsappInput.checkValidity()) {
+                    event.preventDefault();
+                }
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const githubLinkInput = document.getElementById('githubLink');
+            const linkedinLinkInput = document.getElementById('linkedinLink');
+            const githubLinkError = document.getElementById('githubLinkError');
+            const linkedinLinkError = document.getElementById('linkedinLinkError');
+        
+            const allowedDomains = ['github.com', 'linkedin.com', 'instagram.com', 'x.com'];
+        
+            function validateLink(input, errorElement) {
+                const linkValue = input.value.trim();
+                try {
+                    const url = new URL(linkValue);
+                    if (!allowedDomains.some(domain => url.hostname.includes(domain))) {
+                        errorElement.style.display = 'block';
+                        input.setCustomValidity('Enter a valid GitHub, LinkedIn, Instagram, or X.com link.');
+                    } else {
+                        errorElement.style.display = 'none';
+                        input.setCustomValidity('');
+                    }
+                } catch (e) {
+                    errorElement.style.display = 'block';
+                    input.setCustomValidity('Enter a valid URL.');
+                }
+            }
+        
+            githubLinkInput.addEventListener('blur', function() {
+                validateLink(githubLinkInput, githubLinkError);
+            });
+        
+            linkedinLinkInput.addEventListener('blur', function() {
+                validateLink(linkedinLinkInput, linkedinLinkError);
+            });
+        
+            const form = document.querySelector('.form-container');
+            form.addEventListener('submit', function(event) {
+                validateLink(githubLinkInput, githubLinkError);
+                validateLink(linkedinLinkInput, linkedinLinkError);
+        
+                if (!githubLinkInput.checkValidity() || !linkedinLinkInput.checkValidity()) {
+                    event.preventDefault();
+                }
+            });
+        });
+        
+            // Link validation
+            linkInput.addEventListener('blur', function() {
+                const linkValue = linkInput.value.trim();
+                try {
+                    const url = new URL(linkValue);
+                    if (!allowedDomains.some(domain => url.hostname.includes(domain))) {
+                        linkError.style.display = 'block';
+                        linkInput.setCustomValidity('Enter a valid GitHub, LinkedIn, Instagram, or X.com link.');
+                    } else {
+                        linkError.style.display = 'none';
+                        linkInput.setCustomValidity('');
+                    }
+                } catch (e) {
+                    linkError.style.display = 'block';
+                    linkInput.setCustomValidity('Enter a valid URL.');
+                }
+            });
+        
+            const form = document.querySelector('.form-container');
+            form.addEventListener('submit', function(event) {
+                const numberValue = numberInput.value.trim();
+                const linkValue = linkInput.value.trim();
+                let valid = true;
+        
+                if (numberValue && !/^\d+$/.test(numberValue)) {
+                    numberError.style.display = 'block';
+                    numberInput.setCustomValidity('Please enter a valid number.');
+                    valid = false;
+                } else {
+                    numberError.style.display = 'none';
+                    numberInput.setCustomValidity('');
+                }
+        
+                try {
+                    const url = new URL(linkValue);
+                    if (!allowedDomains.some(domain => url.hostname.includes(domain))) {
+                        linkError.style.display = 'block';
+                        linkInput.setCustomValidity('Enter a valid GitHub, LinkedIn, Instagram, or X.com link.');
+                        valid = false;
+                    } else {
+                        linkError.style.display = 'none';
+                        linkInput.setCustomValidity('');
+                    }
+                } catch (e) {
+                    linkError.style.display = 'block';
+                    linkInput.setCustomValidity('Enter a valid URL.');
+                    valid = false;
+                }
+        
+                if (!valid) event.preventDefault(); // Prevent form submission if invalid
+            });
+        });
+        
+        
+                document.addEventListener('DOMContentLoaded', function() {
+                    const particlesContainer = document.getElementById('particles');
+                    const particleCount = 20;
+                    
+                    for (let i = 0; i < particleCount; i++) {
+                        const particle = document.createElement('div');
+                        particle.classList.add('particle');
+                        
+                        const size = Math.random() * 30 + 10;
+                        particle.style.width = `${size}px`;
+                        particle.style.height = `${size}px`;
+                        
+                        const posX = Math.random() * 100;
+                        const posY = Math.random() * 100;
+                        particle.style.left = `${posX}%`;
+                        particle.style.top = `${posY}%`;
+                        
+                        const delay = Math.random() * 5;
+                        particle.style.animationDelay = `${delay}s`;
+                        
+                        const duration = Math.random() * 10 + 5;
+                        particle.style.animationDuration = `${duration}s`;
+                        
+                        particlesContainer.appendChild(particle);
+                    }
+                    
+                    const applyBtn = document.getElementById('apply-btn');
+                    const landingPage = document.getElementById('landing-page');
+                    const formContainer = document.getElementById('form-container');
+                    const audio = document.getElementById('background-music');
+                    const audioControls = document.getElementById('audio-controls');
+                    const muteBtn = document.getElementById('mute-btn');
+                    const volumeControl = document.getElementById('volume-control');    
+                    const stopBtn = document.getElementById('stop-btn');
+                    const loading = document.getElementById('loading');
+                    
+                    applyBtn.addEventListener('click', function() {
+                        loading.classList.add('active');
+                        
+                        audio.volume = volumeControl.value / 100;
+                        audio.play().catch(e => {
+                            console.warn('Audio autoplay was prevented:', e);
+                        });
+                        
+                        audioControls.style.display = 'flex';       
+                        setTimeout(() => {
+                            landingPage.classList.add('slide-up');
+                            formContainer.style.display = 'block';
+                            
+                            window.scrollTo(0, 0);
+                            
+                            document.body.style.overflow = 'hidden';
+                            
+                            setTimeout(() => {
+                                loading.classList.remove('active');
+                                document.body.style.overflow = '';
+                                if (audio.paused) {
+                                    audio.play().catch(e => {
+                                        console.warn('Audio autoplay was still prevented:', e);
+                                    });
+                                }
+                            }, 800);
+                        }, 1000);
+                    });
+
+                    document.addEventListener('DOMContentLoaded', function () {
+    const preferredTeam1 = document.getElementById('preferredTeam1');
+    const additionalPreferences = document.getElementById('additional-preferences');
+
+    function updateAdditionalPreferences() {
+        const team = preferredTeam1.value; // Get the selected team value
+        const allSections = additionalPreferences.querySelectorAll('.section');
+        
+        // Hide all sections first
+        allSections.forEach(section => section.style.display = 'none');
+
+        // Show the section for the selected team
+        if (team) {
+            const section = document.getElementById(`${team}-team`);
+            if (section) {
+                section.style.display = 'block'; // Show the section
+            } else {
+                console.error(`Section not found for team: ${team}`);
+            }
+        }
+    }
+
+    // Add event listener to the dropdown
+    preferredTeam1.addEventListener('change', updateAdditionalPreferences);
+});
+                    
+                    const scrollToFormBtn = document.getElementById('scroll-to-form');
+                    scrollToFormBtn.addEventListener('click', function() {
+                        const formElement = document.querySelector('.form-container');
+                        formElement.scrollIntoView({ behavior: 'smooth' });
+                    });
+                    
+                    muteBtn.addEventListener('click', function() {
+                        if (audio.muted) {
+                            audio.muted = false;
+                            muteBtn.textContent = '🔊';
+                        } else {
+                            audio.muted = true;
+                            muteBtn.textContent = '🔇';
+                        }
+                    });
+                    
+                    volumeControl.addEventListener('input', function() {
+                        audio.volume = this.value / 100;
+                        if (this.value === '0') {
+                            muteBtn.textContent = '🔇';
+                        } else {
+                            muteBtn.textContent = '🔊';
+                            audio.muted = false;
+                        }
+                    });
+                    
+                    stopBtn.addEventListener('click', function() {
+                        audio.pause();
+                        audio.currentTime = 0;
+                    });
+        
+                    // Show/Hide Additional Preferences based on Team Selection
+                    const preferredTeam1 = document.getElementById('preferredTeam1');
+                    const preferredTeam2 = document.getElementById('preferredTeam2');
+                    const additionalPreferences = document.getElementById('additional-preferences');
+        
+                    function updateAdditionalPreferences() {
+                        const teams = [preferredTeam1.value, preferredTeam2.value];
+                        const allSections = additionalPreferences.querySelectorAll('.section');
+                        allSections.forEach(section => section.style.display = 'none');
+        
+                        teams.forEach(team => {
+                            if (team) {
+                                const section = document.getElementById(`${team}-team`);
+                                if (section) section.style.display = 'block';
+                            }
+                        });
+                    }
+        
+                    preferredTeam1.addEventListener('change', updateAdditionalPreferences);
+                    preferredTeam2.addEventListener('change', updateAdditionalPreferences);
+                });
+            </script>
+        </body>
+        </html>
