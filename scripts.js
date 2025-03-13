@@ -12,11 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-//test
-// Varun, check krlena ek baar
-// i can see it
 
-//Number validation
 document.addEventListener("DOMContentLoaded", function () {
     let phoneInput = document.getElementById("phone");
     let phoneError = document.getElementById("phoneError");
