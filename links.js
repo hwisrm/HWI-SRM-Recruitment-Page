@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const linkValue = input.value.trim();
 
         if (!linkValue) {
-            // If empty, allow submission (optional validation)
+            // If empty, allow submission
             errorElement.style.display = 'none';
             input.setCustomValidity('');
             return;
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     linkedinLinkInput.addEventListener('blur', () => validateLink(linkedinLinkInput, linkedinLinkError));
 
     // Validate on form submission
-    const form = document.querySelector('form'); // Selects the first <form> element
+    const form = document.querySelector('form');
     form.addEventListener('submit', function (event) {
         validateLink(githubLinkInput, githubLinkError);
         validateLink(linkedinLinkInput, linkedinLinkError);
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const email = input.value.trim();
 
         if (!email) {
-            // If empty, allow submission (optional validation)
+            // If empty, allow submission
             errorElement.style.display = 'none';
             input.setCustomValidity('');
             return;
@@ -118,3 +118,37 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+//Registration Number
+document.addEventListener('DOMContentLoaded', function () {
+    const regNumberInput = document.getElementById('regNumber');
+    const regNumberError = document.createElement('small'); // Create error message element
+    regNumberError.style.color = 'red';
+    regNumberError.style.display = 'none';
+    regNumberError.textContent = 'Invalid Registration No';
+    regNumberInput.parentNode.appendChild(regNumberError); 
+
+    function validateRegNumber() {
+        const regValue = regNumberInput.value.trim();
+        const regPattern = /^RA\d{13}$/;
+
+        if (!regPattern.test(regValue)) {
+            regNumberError.style.display = 'block';
+            regNumberInput.setCustomValidity('Invalid Registration Number');
+        } else {
+            regNumberError.style.display = 'none';
+            regNumberInput.setCustomValidity('');
+        }
+    }
+
+    regNumberInput.addEventListener('blur', validateRegNumber);
+
+    // Validate on form submission
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (event) {
+        validateRegNumber();
+
+        if (!regNumberInput.checkValidity()) {
+            event.preventDefault();
+        }
+    });
+});
