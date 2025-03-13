@@ -74,12 +74,12 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="phone" class="required-field">Phone Number</label>
-                            <input type="tel" id="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
+                            <input type="tel" id="phone" placeholder="Enter your phone number" pattern="\d{10}" required>
                             <div id="phoneError" style="color: red; display: none;">Please enter a valid 10-digit number.</div>
                         </div>
                         <div class="form-group">
                             <label for="whatsapp" class="required-field">Whatsapp Contact Number</label>
-                            <input type="tel" id="whatsapp" placeholder="Whatsapp Contact" pattern="[0-9]{10}" required>
+                            <input type="tel" id="whatsapp" placeholder="Whatsapp Contact" pattern="\d{10}" required>
                             <div id="whatsappError" style="color: red; display: none;">Please enter a valid 10-digit number.</div>
                         </div>
                     </div>
@@ -226,25 +226,29 @@
                     
                     <!-- Design Team -->
                     <div class="section" id="design-team" style="display: none;">
-                        <div class="section-title">Design Team</div>
+                        <div class="section-title" >Design Team</div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label class="required-field">Design Software *</label>
+                                <label class="required-field" style="color: white;">Design Software *</label>
                                 <div>
                                     <input type="checkbox" id="figma" name="designsoft" value="figma">
-                                    <label for="figma">Figma</label>
+                                    <label for="figma" style="color: white;">Figma</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" id="canva" name="designsoft" value="canva">
-                                    <label for="canva">Canva</label>
+                                    <label for="canva" style="color: white;">Canva</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" id="adobe" name="designsoft" value="adobe">
-                                    <label for="adobe">Adobe XD</label>
+                                    <label for="adobe" style="color: white;">Adobe XD</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" id="photoshop" name="designsoft" value="photoshop">
-                                    <label for="photoshop">Photoshop</label>
+                                    <label for="photoshop" style="color: white;">Photoshop</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="illus" name="designsoft" value="illus">
+                                    <label for="illus" style="color: white;">Adobe Illustrator</label>
                                 </div>
                             </div>
                         </div>
@@ -262,28 +266,29 @@
                                 <textarea id="designSamples" placeholder="Enter Links to Design Samples" required></textarea>
                             </div>
                         </div>
+                        <div class="divider"></div>
                     </div>
 
                     <div class="section" id="editing-team" style="display: none;">
                         <div class="section-title">Editing Team</div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label class="required-field">Editing Software *</label>
+                                <label class="required-field" style="color: white;">Editing Software *</label>
                                 <div>
                                     <input type="checkbox" id="premiere-pro" name="editsoft" value="premiere-pro">
-                                    <label for="premiere-pro">Adobe Premiere Pro</label>
+                                    <label for="premiere-pro" style="color: white;">Adobe Premiere Pro</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" id="resolve" name="editsoft" value="resolve">
-                                    <label for="resolve">DaVinci Resolve</label>
+                                    <label for="resolve" style="color: white;">DaVinci Resolve</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" id="filmora" name="editsoft" value="filmora">
-                                    <label for="filmora">Wondershare Filmora</label>
+                                    <label for="filmora" style="color: white;">Wondershare Filmora</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" id="mobile-editors" name="editsoft" value="mobile-editors">
-                                    <label for="mobile-editors">Mobile Editors (Clipcut, VN, etc.)</label>
+                                    <label for="mobile-editors" style="color: white;">Mobile Editors (Clipcut, VN, etc.)</label>
                                 </div>
                             </div>
                         </div>
@@ -375,6 +380,7 @@
                                 <label for="writingSamplesContent" class="required-field">Content Samples *</label>
                                 <textarea id="writingSamplesContent" placeholder="Link(s) to content samples [articles, blog, posts etc]" required></textarea>
                             </div>
+                            <div class="divider"></div>
                         </div>
                         
         
