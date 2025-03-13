@@ -413,6 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 loading.classList.add('active');
                 
                 audio.volume = volumeControl.value / 100;
+                document.getElementById('background-music').volume = 0.1;
                 audio.play().catch(e => {
                     console.warn('Audio autoplay was prevented:', e);
                 });
