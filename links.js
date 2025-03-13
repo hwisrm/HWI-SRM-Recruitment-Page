@@ -152,3 +152,56 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const linkedinInput = document.getElementById('linkedinLinkSocial');
+    const twitterInput = document.getElementById('contentSamples');
+    const instagramInput = document.getElementById('profileLinks');
+
+    const linkedinError = document.getElementById('linkedinLinkError');
+    const twitterError = document.getElementById('xLinkError');
+    const instagramError = document.getElementById('instagramLinkError');
+
+    function validateLink(input, errorElement, validDomains) {
+        const linkValue = input.value.trim();
+        try {
+            const url = new URL(linkValue);
+            if (!validDomains.some(domain => url.hostname.includes(domain))) {
+                errorElement.style.display = 'block';
+                input.setCustomValidity('Invalid link.');
+            } else {
+                errorElement.style.display = 'none';
+                input.setCustomValidity('');
+            }
+        } catch (e) {
+            errorElement.style.display = 'block';
+            input.setCustomValidity('Invalid URL format.');
+        }
+    }
+
+    linkedinInput.addEventListener('blur', function () {
+        validateLink(linkedinInput, linkedinError, ['linkedin.com']);
+    });
+
+    twitterInput.addEventListener('blur', function () {
+        validateLink(twitterInput, twitterError, ['x.com', 'twitter.com']);
+    });
+
+    instagramInput.addEventListener('blur', function () {
+        validateLink(instagramInput, instagramError, ['instagram.com']);
+    });
+
+    // Validate on form submission
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (event) {
+        validateLink(linkedinInput, linkedinError, ['linkedin.com']);
+        validateLink(twitterInput, twitterError, ['x.com', 'twitter.com']);
+        validateLink(instagramInput, instagramError, ['instagram.com']);
+
+        if (!linkedinInput.checkValidity() || 
+            !twitterInput.checkValidity() || 
+            !instagramInput.checkValidity()) {
+            event.preventDefault(); // Prevent form submission if any input is invalid
+        }
+    });
+});
