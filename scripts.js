@@ -13,22 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-/* Old code for number validation
-
-function validateNumber(input, errorElementId) {
-    const numberValue = input.value.trim();
-    const errorElement = document.getElementById(errorElementId);
-    if (numberValue && !/^\d{10}$/.test(numberValue)) {
-        errorElement.style.display = 'block';
-        input.setCustomValidity('Please enter a valid 10-digit number.');
-    } else {
-        errorElement.style.display = 'none';
-        input.setCustomValidity('');
-    }
-}
-*/
-
 // Varun, check krlena ek baar
+// i can see it
 
 //Number validation
 document.addEventListener("DOMContentLoaded", function () {
