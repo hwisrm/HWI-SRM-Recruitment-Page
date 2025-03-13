@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+/* Old code for number validation
+
 function validateNumber(input, errorElementId) {
     const numberValue = input.value.trim();
     const errorElement = document.getElementById(errorElementId);
@@ -24,6 +26,29 @@ function validateNumber(input, errorElementId) {
         input.setCustomValidity('');
     }
 }
+*/
+
+// Varun, check krlena ek baar
+
+//Number validation
+document.addEventListener("DOMContentLoaded", function () {
+    let phoneInput = document.getElementById("phone");
+    let phoneError = document.getElementById("phoneError");
+
+    phoneInput.addEventListener("input", function () {
+        let phoneNumber = phoneInput.value.trim();
+
+        // Check if the phone number has exactly 10 digits
+        if (/^\d{10}$/.test(phoneNumber)) {
+            phoneError.style.display = "none";
+            phoneInput.style.border = "2px solid green";
+        } else {
+            phoneError.style.display = "block";
+            phoneInput.style.border = "2px solid red";
+        }
+    });
+});
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('recruitment-form');
