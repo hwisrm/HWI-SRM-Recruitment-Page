@@ -36,6 +36,26 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    let whatsappInput = document.getElementById("whatsapp");
+    let whatsappError = document.getElementById("whatsappError");
+
+    if (whatsappInput && whatsappError) {
+        whatsappInput.addEventListener("input", function () {
+            let phoneNumber = whatsappInput.value.trim();
+    
+            if (/^\d{10}$/.test(phoneNumber)) {
+                whatsappError.style.display = "none";
+                whatsappInput.style.border = "2px solid green";
+            } else {
+                whatsappError.style.display = "block"; 
+                whatsappInput.style.border = "2px solid red"; 
+            }
+        });
+    }
+});
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('recruitment-form');
     const thankYouPage = document.getElementById('thank-you-page');
