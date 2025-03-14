@@ -39,6 +39,66 @@
             box-shadow: 0 8px 25px rgba(255, 64, 179, 0.6);
         }
 
+        /* Style for checkboxes */
+.form-group div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+}
+
+/* Style for checkboxes */
+input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #007BFF;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Checked state */
+input[type="checkbox"]:checked {
+    background-color: #007BFF;
+    border-color: #007BFF;
+}
+
+/* Add a tick mark */
+input[type="checkbox"]::after {
+    content: "✔";
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+/* Show tick mark when checked */
+input[type="checkbox"]:checked::after {
+    display: block;
+}
+
+/* Label styling */
+label {
+    font-size: 16px;
+    color: white;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Label color change when checked */
+input[type="checkbox"]:checked + label {
+    color: #007BFF;
+    font-weight: bold;
+}
+
+
         /* Popup Styles */
         .popup {
             display: none;

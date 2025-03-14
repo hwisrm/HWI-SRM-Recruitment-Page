@@ -13,17 +13,44 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function validateNumber(input, errorElementId) {
-    const numberValue = input.value.trim();
-    const errorElement = document.getElementById(errorElementId);
-    if (numberValue && !/^\d{10}$/.test(numberValue)) {
-        errorElement.style.display = 'block';
-        input.setCustomValidity('Please enter a valid 10-digit number.');
-    } else {
-        errorElement.style.display = 'none';
-        input.setCustomValidity('');
+document.addEventListener("DOMContentLoaded", function () {
+    let phoneInput = document.getElementById("phone");
+    let phoneError = document.getElementById("phoneError");
+
+    phoneInput.addEventListener("input", function () {
+        let phoneNumber = phoneInput.value.trim();
+
+        // Check if the phone number has exactly 10 digits
+        if (/^\d{10}$/.test(phoneNumber)) {
+            phoneError.style.display = "none";
+            phoneInput.style.border = "2px solid green";
+        } else {
+            phoneError.style.display = "block";
+            phoneInput.style.border = "2px solid red";
+        }
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    let whatsappInput = document.getElementById("whatsapp");
+    let whatsappError = document.getElementById("whatsappError");
+
+    if (whatsappInput && whatsappError) {
+        whatsappInput.addEventListener("input", function () {
+            let phoneNumber = whatsappInput.value.trim();
+    
+            if (/^\d{10}$/.test(phoneNumber)) {
+                whatsappError.style.display = "none";
+                whatsappInput.style.border = "2px solid green";
+            } else {
+                whatsappError.style.display = "block"; 
+                whatsappInput.style.border = "2px solid red"; 
+            }
+        });
     }
-}
+});
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('recruitment-form');
@@ -382,6 +409,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 loading.classList.add('active');
                 
                 audio.volume = volumeControl.value / 100;
+                document.getElementById('background-music').volume = 0.1;
                 audio.play().catch(e => {
                     console.warn('Audio autoplay was prevented:', e);
                 });
