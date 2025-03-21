@@ -45,10 +45,10 @@ async function insertcontentTeam() {
 .from('content_team')
 .insert([
   { 
-    portfolio_link: document.getElementById('portfolioLink').value,
-    linkedin_link: document.getElementById('linkedinLink').value,
-    twitter_link: document.getElementById('twitterLink').value,
-    instagram_link: document.getElementById('instagramLink').value,
+    portfolio_link: document.getElementById('portfolioLinkContent').value,
+    linkedin_link: document.getElementById('linkedinLinkContent').value,
+    twitter_link: document.getElementById('twitterLinkConcent').value,
+    instagram_link: document.getElementById('instagramLinkContent').value,
   },
 ])
 .select()
@@ -61,11 +61,11 @@ async function insertsocialmediaTeam() {
 .from('social_media_team')
 .insert([
   { 
-    portfolio_link: document.getElementById('portfolioLink').value,
-    linkedin_link: document.getElementById('linkedinLink').value,
-    twitter_link: document.getElementById('twitterLink').value,
-    instagram_link: document.getElementById('instagramLink').value,
-    discord_link: document.getElementById('discordLink').value,  
+    portfolio_link: document.getElementById('portfolioLinkSocial').value,
+    linkedin_link: document.getElementById('linkedinLinkSocial').value,
+    twitter_link: document.getElementById('twitterLinkSocial').value,
+    instagram_link: document.getElementById('instagramLinkSocial').value,
+    discord_link: document.getElementById('discordLinkSocial').value,  
 
   },
 ])
@@ -82,7 +82,7 @@ async function insertdesignTeam() {
     .from('design_team')
     .insert([
       { 
-        portfolio_link: document.getElementById('portfolioLink').value,
+        portfolio_link: document.getElementById('portfolioLinkDesign').value,
         design_tool: designToolStr,
       },
     ])
@@ -99,9 +99,56 @@ async function inserteditingTeam() {
     .from('editing_team')
     .insert([
       { 
-        portfolio_link: document.getElementById('portfolioLink').value,
+        portfolio_link: document.getElementById('portfolioLinkEditing').value,
         editing_tool: editingToolStr,
       },
     ])
     .select();
 }
+
+async function handleSubmit(event) {
+    event.preventDefault();
+    
+    try {
+        const userResult = await insertUsers();
+        if (userResult.error) throw userResult.error;
+        
+        const selectedTeam = document.getElementById('team').value;
+        
+        switch(selectedTeam) {
+            case 'technical':
+                await inserttechTeam();
+                break;
+            case 'content':
+                await insertcontentTeam();
+                break;
+            case 'socialmedia':
+                await insertsocialmediaTeam();
+                break;
+            case 'design':
+                await insertdesignTeam();
+                break;
+            case 'editing':
+                await inserteditingTeam();
+                break;
+            default:
+                throw new Error('Invalid team selection');
+        }
+        
+        alert('Form submitted successfully!');
+        document.getElementById('recruitmentForm').reset();
+        
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Error submitting form. Please try again.');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('recruitmentForm');
+    if (form) {
+        form.addEventListener('submit', handleSubmit);
+    }
+});
+
+export { handleSubmit };
