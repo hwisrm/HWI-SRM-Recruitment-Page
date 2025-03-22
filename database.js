@@ -404,12 +404,15 @@ export async function handleSubmit(event) {
     
     // Get selected team from dropdown
     const selectedTeam = getElementValue('preferredTeam1');
+    const selectedTeam2 = getElementValue('preferredTeam2');
     if (!selectedTeam) {
       throw new Error('Please select a preferred team');
     }
     
     // Insert team specific data with reference to the user
     const teamResult = await insertTeamData(selectedTeam, userId);
+    const teamResult2 = await insertTeamData(selectedTeam2, userId);
+
     if (teamResult.error) throw teamResult.error;
     
     // **Call the application data submission**
@@ -424,10 +427,7 @@ export async function handleSubmit(event) {
     
     // Reset the form
     document.getElementById('recruitmentForm').reset();
-    
-    // Track successful submission (optional analytics)
-    trackFormSubmission(selectedTeam);
-    
+
   } catch (error) {
     console.error('Error submitting form:', error);
     showFormError(error.message || 'Error submitting form. Please try again.');
@@ -440,14 +440,6 @@ export async function handleSubmit(event) {
   }
 }
 
-/**
- * Optional analytics function
- */
-function trackFormSubmission(teamType) {
-  // This is a placeholder for analytics tracking
-  // Implement according to your analytics system
-  console.log(`Form submitted for team: ${teamType}`);
-}
 
 /**
  * Event Listeners and Initialization

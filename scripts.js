@@ -475,7 +475,7 @@ async function handleFormSubmission(form) {
                     teamResult = await inserteditingTeam();
                     break;
                 default:
-                    console.log('No team selected or invalid team selection');
+                    alert('No team selected or invalid team selection');
             }
             
             if (teamResult?.error) throw teamResult.error;
