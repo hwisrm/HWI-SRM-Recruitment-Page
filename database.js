@@ -175,10 +175,9 @@ function getElementValue(id, defaultValue = '') {
   return element ? sanitizeInput(element.value) : defaultValue;
 }
 
-function getMultiSelectValues(id) {
-  const element = document.getElementById(id);
-  if (!element) return [];
-  return Array.from(element.selectedOptions).map(option => sanitizeInput(option.value));
+function getCheckedValues(name) {
+  return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
+    .map(input => sanitizeInput(input.value));
 }
 
 function validateUserData(userData) {
@@ -312,7 +311,7 @@ async function insertTeamData(teamType, userId) {
         teamData = {
           ...teamData,
           portfolio_link: getElementValue('portfolioLinkDesign'),
-          design_tool: getMultiSelectValues('designTool').join(',')
+          design_tool: `{${getCheckedValues('designsoft').join(',')}}`
         };
         break;
         
@@ -320,7 +319,7 @@ async function insertTeamData(teamType, userId) {
         teamData = {
           ...teamData,
           portfolio_link: getElementValue('portfolioLinkEditing'),
-          editing_tool: getMultiSelectValues('editingTool').join(',')
+          editing_tool: `{${getcheckedValues('editingsoft').join(',')}}`
         };
         break;
         
@@ -489,3 +488,4 @@ export {
   saveFormProgress,
   loadFormProgress
 };
+
