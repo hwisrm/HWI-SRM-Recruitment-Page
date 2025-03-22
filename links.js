@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function validateRegNumber() {
         const regValue = regNumberInput.value.trim();
-        const regPattern = /^RA\d{13}$/;
+        const regPattern = /^RA\d{13}$/i;
 
         if (!regPattern.test(regValue)) {
             regNumberError.style.display = 'block';

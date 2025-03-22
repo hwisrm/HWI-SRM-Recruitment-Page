@@ -58,7 +58,7 @@ function initializeLandingPage() {
             // Play background music if it exists
             const audio = document.getElementById('background-music');
             if (audio) {
-                audio.volume = 0.1;
+                audio.volume = 0.4;
                 audio.play().catch(e => {
                     console.warn('Audio autoplay was prevented:', e);
                 });
@@ -101,37 +101,40 @@ function initializeAudioControls() {
     const muteBtn = document.getElementById('mute-btn');
     const volumeControl = document.getElementById('volume-control');
     const stopBtn = document.getElementById('stop-btn');
+
+        // Set the initial volume to 40 when the page loads
+        if (audio) {
+            audio.volume = 0.4; // 40% volume
+        }
     
-    if (audio && muteBtn) {
-        muteBtn.addEventListener('click', function() {
-            if (audio.muted) {
-                audio.muted = false;
-                muteBtn.textContent = '🔊';
-            } else {
-                audio.muted = true;
-                muteBtn.textContent = '🔇';
-            }
+        // Set volume control to 40%
+        if (volumeControl) {
+            volumeControl.value = 40;
+        }
+
+    // Mute/Unmute Toggle
+    if (muteBtn) {
+        muteBtn.addEventListener('click', function () {
+            audio.muted = !audio.muted;
+            muteBtn.textContent = audio.muted ? '🔇' : '🔊';
+            volumeControl.value = audio.muted ? 0 : audio.volume * 100;
         });
     }
-    
-    if (audio && volumeControl) {
-        volumeControl.addEventListener('input', function() {
+
+    // Volume Control
+    if (volumeControl) {
+        volumeControl.addEventListener('input', function () {
             const volume = this.value / 100;
             audio.volume = volume;
-            
-            if (muteBtn) {
-                if (volume === 0) {
-                    muteBtn.textContent = '🔇';
-                } else {
-                    muteBtn.textContent = '🔊';
-                    audio.muted = false;
-                }
-            }
+            audio.muted = volume === 0;
+            muteBtn.textContent = volume === 0 ? '🔇' : '🔊';
         });
+        volumeControl.value = audio.volume * 100;
     }
-    
-    if (audio && stopBtn) {
-        stopBtn.addEventListener('click', function() {
+
+    // Play/Pause Toggle
+    if (stopBtn) {
+        stopBtn.addEventListener('click', function () {
             if (audio.paused) {
                 audio.play();
                 stopBtn.textContent = '⏸️';
@@ -238,7 +241,6 @@ function initializeFormValidation() {
 // Initialize phone number validation
 function initializePhoneValidation() {
     const phoneInput = document.getElementById('phone');
-    const whatsappInput = document.getElementById('whatsapp');
     
     if (phoneInput) {
         const phoneError = document.getElementById('phoneError');
@@ -249,19 +251,6 @@ function initializePhoneValidation() {
         if (phoneError) {
             phoneInput.addEventListener('blur', function() {
                 validatePhoneNumber(phoneInput, phoneError);
-            });
-        }
-    }
-    
-    if (whatsappInput) {
-        const whatsappError = document.getElementById('whatsappError');
-        whatsappInput.addEventListener('input', function() {
-            validatePhoneNumber(whatsappInput, whatsappError);
-        });
-        
-        if (whatsappError) {
-            whatsappInput.addEventListener('blur', function() {
-                validatePhoneNumber(whatsappInput, whatsappError);
             });
         }
     }
@@ -397,7 +386,7 @@ function initializeFormSubmission() {
             
             if (formContainer && thankYouPage) {
                 formContainer.style.display = 'none';
-                thankYouPage.style.display = 'flex';
+                thankYouPage.style.display = 'block';
                 window.scrollTo(0, 0);
             }
         }
@@ -498,7 +487,7 @@ async function handleFormSubmission(form) {
         
         if (thankYouPage && formContainer) {
             formContainer.style.display = 'none';
-            thankYouPage.style.display = 'flex';
+            thankYouPage.style.display = 'block';
             window.scrollTo(0, 0);
         }
         

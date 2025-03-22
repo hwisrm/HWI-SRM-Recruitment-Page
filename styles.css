@@ -140,6 +140,7 @@ input[type="checkbox"]:checked + label {
         
         .landing-title {
             font-size: 3.5rem;
+            text-align: center;
             font-weight: 800;
             margin-bottom: 20px;
             background: linear-gradient(90deg, #ff40b3, #6d07a7);
@@ -150,6 +151,8 @@ input[type="checkbox"]:checked + label {
         }
         
         .landing-description {
+            text-align: center;
+            padding: 0 50px 0 50px;
             font-size: 1.2rem;
             margin-bottom: 40px;
             color: rgba(255, 255, 255, 0.8);
@@ -379,7 +382,7 @@ input[type="checkbox"]:checked + label {
             background: rgba(17, 17, 41, 0.8);
             border-radius: 50px;
             padding: 10px;
-            display: none;
+            display: flex;
             align-items: center;
             z-index: 1000;
             backdrop-filter: blur(5px);
@@ -408,7 +411,9 @@ input[type="checkbox"]:checked + label {
         }
         
         .volume-control {
-            width: 80px;
+            flex-grow: 1; 
+            width: 100%;
+            max-width: 80px;
             margin: 0 10px;
         }
         
@@ -461,16 +466,16 @@ input[type="checkbox"]:checked + label {
         }
 
         .thank-you-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: radial-gradient(circle at center, #1a0b2e 0%, #07071a 100%);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.8s ease-out;
-}
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #1a0b2e 0%, #07071a 100%);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.8s ease-out;
+        }
         
         @media (max-width: 768px) {
             .landing-title {
@@ -493,4 +498,38 @@ input[type="checkbox"]:checked + label {
                 padding: 20px 15px;
                 
             }
+        }
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 50px;  
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .social-link:hover {
+            color: #ddd;
+        }
+
+        .social-link img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .required-field::after {
+            content: " *";
+            color: red;
+            font-weight: bold;
         }
