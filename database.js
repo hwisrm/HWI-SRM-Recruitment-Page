@@ -222,8 +222,19 @@ function validateUserData(userData) {
  */
 function handleConnectionError(error) {
   console.error('Connection error:', error);
-  // Show user-friendly error message
-  showFormError('Network connection error. Please check your internet connection and try again.');
+  // Add more detailed error logging
+  if (error.message) {
+    console.error('Error message:', error.message);
+  }
+  if (error.details) {
+    console.error('Error details:', error.details);
+  }
+  
+  // Show user-friendly error message with more detail
+  const errorMessage = error.message 
+    ? `Database error: ${error.message}` 
+    : 'Network connection error. Please check your internet connection and try again.';
+  showFormError(errorMessage);
   return { error };
 }
 
@@ -272,6 +283,11 @@ async function insertTeamData(teamType, userId) {
       return handleConnectionError(new Error('No internet connection'));
     }
 
+    // Add validation for userId
+    if (!userId) {
+      return handleConnectionError(new Error('User ID is required'));
+    }
+
     // Skip inserting team data for "event" and "sponsorship" teams
     if (teamType === 'event' || teamType === 'sponsorship') {
       console.log(`No team data insertion for ${teamType} team.`);
@@ -279,6 +295,24 @@ async function insertTeamData(teamType, userId) {
     }
 
     let teamData = { user_id: userId };
+    let tableName = '';  // Initialize tableName
+    
+    // Map team types to their corresponding table names
+    const tableNameMap = {
+      'technical': 'technical_team',
+      'content': 'content_team',
+      'social-media': 'socialmedia_team',  // Changed from social-media_team
+      'design': 'design_team',
+      'editing': 'editing_team'
+    };
+
+    // Get the correct table name
+    tableName = tableNameMap[teamType];
+    if (!tableName) {
+      throw new Error(`Invalid team type: ${teamType}`);
+    }
+    
+    console.log('Processing team type:', teamType);
     
     switch (teamType) {
       case 'technical':
@@ -329,20 +363,32 @@ async function insertTeamData(teamType, userId) {
         break;
         
       default:
+        // Add more context to the error
+        if (!teamType) {
+          throw new Error('Team type is required');
+        }
         throw new Error(`Invalid team type: ${teamType}`);
     }
     
+    console.log('Sending team data:', teamData);
+    console.log('Inserting into table:', tableName);
+
     const result = await supabase
-      .from(`${teamType}_team`)
+      .from(tableName)
       .insert([teamData])
       .select();
 
+    // Log the result
+    console.log('Insert result:', result);
+
     if (result.error) {
+      console.error('Supabase error:', result.error);
       return handleConnectionError(result.error);
     }
 
     return result;
   } catch (error) {
+    console.error('Team data insertion error:', error);
     return handleConnectionError(error);
   }
 }
@@ -400,26 +446,40 @@ export async function handleSubmit(event) {
     // Insert user data
     const userResult = await insertUsers();
     if (userResult.error) throw userResult.error;
-
+    
+    if (!userResult.data || !userResult.data[0] || !userResult.data[0].id) {
+      throw new Error('Failed to create user: No user ID returned');
+    }
+    
     const userId = userResult.data[0].id;
-
-    // Get selected team(s) from dropdown
+    console.log('User created with ID:', userId);
+    
+    // Get selected team from dropdown
     const selectedTeam = getElementValue('preferredTeam1');
     const selectedTeam2 = getElementValue('preferredTeam2');
-
+    
     if (!selectedTeam) {
-        throw new Error('Please select a preferred team');
+      throw new Error('Please select a preferred team');
     }
-
-    // Insert team data
+    
+    console.log('Selected teams:', { primary: selectedTeam, secondary: selectedTeam2 });
+    
+    // Insert team specific data with reference to the user
     const teamResult = await insertTeamData(selectedTeam, userId);
-    if (teamResult.error) throw teamResult.error;
-
-    if (selectedTeam2) {
-        const teamResult2 = await insertTeamData(selectedTeam2, userId);
-        if (teamResult2.error) throw teamResult2.error;
+    if (teamResult.error) {
+      console.error('Primary team insertion error:', teamResult.error);
+      throw teamResult.error;
     }
-
+    
+    // Only try to insert second team if one was selected
+    if (selectedTeam2) {
+      const teamResult2 = await insertTeamData(selectedTeam2, userId);
+      if (teamResult2.error) {
+        console.error('Secondary team insertion error:', teamResult2.error);
+        throw teamResult2.error;
+      }
+    }
+    
     // Insert application data
     const appResult = await insertApplicationData(userId);
     if (appResult.error) throw appResult.error;
