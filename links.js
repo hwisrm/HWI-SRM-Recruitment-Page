@@ -155,8 +155,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     const linkedinInput = document.getElementById('linkedinLinkSocial');
-    const twitterInput = document.getElementById('contentSamples');
-    const instagramInput = document.getElementById('profileLinks');
+    const twitterInput = document.getElementById('twitterLinkSocial');
+    const instagramInput = document.getElementById('instagramLinkSocial');
 
     const linkedinError = document.getElementById('linkedinLinkError');
     const twitterError = document.getElementById('xLinkError');

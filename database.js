@@ -319,7 +319,7 @@ async function insertTeamData(teamType, userId) {
         teamData = {
           ...teamData,
           portfolio_link: getElementValue('portfolioLinkEditing'),
-          editing_tool: `{${getcheckedValues('editingsoft').join(',')}}`
+          editing_tool: `{${getCheckedValues('editsoft').join(',')}}`
         };
         break;
         
@@ -358,9 +358,9 @@ async function insertApplicationData(userId) {
 
     const applicationData = {
       user_id: userId,
-      preferred_team1: preferredTeam1 ? preferredTeam1.value : '',
-      preferred_team2: preferredTeam2 ? preferredTeam2.value : '',
-      reason: reason ? reason.value : ''
+      preferred_team1: preferredTeam1 ? preferredTeam1.value : null,
+      preferred_team2: preferredTeam2 ? preferredTeam2.value : null,
+      reason: reason ? reason.value : null
     };
 
     // Assuming you have an "applications" table in Supabase
