@@ -397,47 +397,50 @@ export async function handleSubmit(event) {
   setFormLoading(true);
   
   try {
-    // Insert user data first
+    // Insert user data
     const userResult = await insertUsers();
     if (userResult.error) throw userResult.error;
-    
+
     const userId = userResult.data[0].id;
-    
-    // Get selected team from dropdown
+
+    // Get selected team(s) from dropdown
     const selectedTeam = getElementValue('preferredTeam1');
     const selectedTeam2 = getElementValue('preferredTeam2');
-    if (!selectedTeam) {
-      throw new Error('Please select a preferred team');
-    }
-    
-    // Insert team specific data with reference to the user
-    const teamResult = await insertTeamData(selectedTeam, userId);
-    const teamResult2 = await insertTeamData(selectedTeam2, userId);
 
+    if (!selectedTeam) {
+        throw new Error('Please select a preferred team');
+    }
+
+    // Insert team data
+    const teamResult = await insertTeamData(selectedTeam, userId);
     if (teamResult.error) throw teamResult.error;
-    
-    // **Call the application data submission**
+
+    if (selectedTeam2) {
+        const teamResult2 = await insertTeamData(selectedTeam2, userId);
+        if (teamResult2.error) throw teamResult2.error;
+    }
+
+    // Insert application data
     const appResult = await insertApplicationData(userId);
     if (appResult.error) throw appResult.error;
-    
-    // Show thank-you page and reset the form
-    document.getElementById('thank-you-page').style.display = 'block';
-    
+
+    // Show Thank You page
+    alert("We have received your application. We will reach out to you shortly.")
+
     // Clear saved form progress
     localStorage.removeItem('recruitmentFormProgress');
-    
-    // Reset the form
-    document.getElementById('recruitmentForm').reset();
+
+    // Reset form after a small delay
+    setTimeout(() => {
+        document.getElementById('recruitmentForm').reset();
+    }, 100);
 
   } catch (error) {
-    console.error('Error submitting form:', error);
-    showFormError(error.message || 'Error submitting form. Please try again.');
+      console.error('Error submitting form:', error);
+      showFormError(error.message || 'Error submitting form. Please try again.');
   } finally {
-    // Reset loading state
-    setFormLoading(false);
-    
-    // Restore required attributes to fields that were hidden
-    restoreRequiredToHiddenFields();
+      setFormLoading(false);
+      restoreRequiredToHiddenFields();
   }
 }
 
