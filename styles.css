@@ -375,18 +375,22 @@ select {
     background-size: 16px;
 }
 
-.audio-controls {
-     position: fixed; 
-    bottom: 10px;
+audio-controls {
+    position: fixed;
+    width:fit-content;
+    bottom: 50px;
     left: 20px;
     background: rgba(17, 17, 41, 0.8);
     border-radius: 50px;
     padding: 10px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     z-index: 1000;
     backdrop-filter: blur(5px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
 }
 
 

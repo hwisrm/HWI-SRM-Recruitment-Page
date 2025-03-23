@@ -574,3 +574,15 @@ function updateBranches() {
     // Update required attributes after changing options
     updateRequiredAttributes();
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    let audioControls = document.getElementById("audio-controls");
+
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 350) { 
+            audioControls.style.opacity = "1";
+        } else {
+            audioControls.style.opacity = "0";
+        }
+    });
+});
