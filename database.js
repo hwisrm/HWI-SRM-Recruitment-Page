@@ -281,8 +281,7 @@ async function insertTeamData(teamType, userId) {
           sub_technical_genre: getElementValue('techRole'),
           resume_link: getElementValue('resumeLink'),
           github_link: getElementValue('githubLink'),
-          linkedin_link: getElementValue('linkedinLink'),
-          portfolio_link: getElementValue('portfolioLink')
+          linkedin_link: getElementValue('linkedinLink')
         };
         break;
         
