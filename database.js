@@ -272,6 +272,12 @@ async function insertTeamData(teamType, userId) {
       return handleConnectionError(new Error('No internet connection'));
     }
 
+    // Skip inserting team data for "event" and "sponsorship" teams
+    if (teamType === 'event' || teamType === 'sponsorship') {
+      console.log(`No team data insertion for ${teamType} team.`);
+      return { data: null };
+    }
+
     let teamData = { user_id: userId };
     
     switch (teamType) {
@@ -295,7 +301,7 @@ async function insertTeamData(teamType, userId) {
         };
         break;
         
-      case 'socialmedia':
+      case 'social-media':
         teamData = {
           ...teamData,
           portfolio_link: getElementValue('portfolioLinkSocial'),
@@ -343,7 +349,7 @@ async function insertTeamData(teamType, userId) {
 
 /**
  * Insert Application Data
- * This function handles additional application data submission.
+ * This function handles storing the user's team preferences in the applications table.
  */
 async function insertApplicationData(userId) {
   try {
@@ -362,7 +368,6 @@ async function insertApplicationData(userId) {
       reason: reason ? reason.value : null
     };
 
-    // Assuming you have an "applications" table in Supabase
     const result = await supabase
       .from('applications')
       .insert([applicationData])
@@ -375,9 +380,6 @@ async function insertApplicationData(userId) {
     return result;
   } catch (error) {
     return handleConnectionError(error);
-  } finally {
-    // Clean up any saved form data
-    localStorage.removeItem('recruitmentForm');
   }
 }
 
@@ -438,7 +440,6 @@ export async function handleSubmit(event) {
     restoreRequiredToHiddenFields();
   }
 }
-
 
 /**
  * Event Listeners and Initialization
