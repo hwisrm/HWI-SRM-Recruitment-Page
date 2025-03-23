@@ -19,7 +19,7 @@ body {
 }
 .contact-us-btn {
     position: fixed;
-    bottom: 100px;
+    bottom: 30px;
     right: 20px;
     background: linear-gradient(135deg, #ff40b3, #6d07a7);
     color: white;
@@ -376,9 +376,9 @@ select {
 }
 
 .audio-controls {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+    /* position: fixed; */
+    bottom: 30px;
+    left: 20px;
     background: rgba(17, 17, 41, 0.8);
     border-radius: 50px;
     padding: 10px;
@@ -505,7 +505,6 @@ select {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    gap: 50px;  
 }
 
 .social-link {
