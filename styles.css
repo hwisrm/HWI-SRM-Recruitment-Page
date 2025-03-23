@@ -378,7 +378,7 @@ select {
 .audio-controls {
     position: fixed;
     width:fit-content;
-    bottom: 50px;
+    bottom: 10px;
     left: 20px;
     background: rgba(17, 17, 41, 0.8);
     border-radius: 50px;
