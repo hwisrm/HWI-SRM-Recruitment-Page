@@ -541,3 +541,25 @@ select {
     color: red;
     font-weight: bold;
 }
+
+/* Custom popup style */
+.my-swal-popup {
+    background-color: #1a1a1a; /* Dark background */
+    color: white;
+    border-radius: 10px;
+  }
+  
+  /* Custom title style */
+  .my-swal-title {
+    font-size: 24px;
+    color: #f39c12; /* Orange title */
+  }
+  
+  /* Custom button style */
+  .my-swal-button {
+    background-color: #3498db !important; /* Blue */
+    color: white !important;
+    border-radius: 5px;
+    padding: 10px 20px;
+  }
+  
