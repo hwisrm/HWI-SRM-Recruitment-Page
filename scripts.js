@@ -1,3 +1,5 @@
+// import { handleSubmit } from "./database";
+
 // Wait for the DOM to be fully loaded before running any code
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all UI elements
@@ -445,58 +447,17 @@ function validateForm(form) {
 }
 
 // Handle form submission with Supabase
-async function handleFormSubmission(form) {
-    try {
-        // Insert user data first
-        const userResult = await insertUsers();
-        if (userResult.error) throw userResult.error;
-        
-        // Get selected team from dropdown
-        const selectedTeam = document.getElementById('team')?.value || 
-                            document.getElementById('preferredTeam1')?.value;
-        
-        if (selectedTeam) {
-            let teamResult;
-            
-            switch (selectedTeam) {
-                case 'technical':
-                    teamResult = await inserttechTeam();
-                    break;
-                case 'content':
-                    teamResult = await insertcontentTeam();
-                    break;
-                case 'socialmedia':
-                    teamResult = await insertsocialmediaTeam();
-                    break;
-                case 'design':
-                    teamResult = await insertdesignTeam();
-                    break;
-                case 'editing':
-                    teamResult = await inserteditingTeam();
-                    break;
-                default:
-                    alert('No team selected or invalid team selection');
-            }
-            
-            if (teamResult?.error) throw teamResult.error;
-        }
-        
-        // Show thank-you page and reset the form
-        const thankYouPage = document.getElementById('thank-you-page');
-        const formContainer = document.getElementById('form-container');
-        
-        if (thankYouPage && formContainer) {
-            formContainer.style.display = 'none';
-            thankYouPage.style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-        
-        form.reset();
-    } catch (error) {
-        console.error('Error submitting form:', error);
-        alert('Error submitting form. Please try again.');
+import { handleSubmit } from "./database.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById('recruitmentForm');
+    if (form) {
+        form.addEventListener('submit', handleSubmit); // Call handleSubmit from database.js
+    } else {
+        console.error("Recruitment form not found.");
     }
-}
+});
+
 
 // The following functions are kept for backward compatibility
 // with your existing code that might be calling them
