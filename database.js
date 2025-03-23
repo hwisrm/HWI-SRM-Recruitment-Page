@@ -484,8 +484,19 @@ export async function handleSubmit(event) {
     const appResult = await insertApplicationData(userId);
     if (appResult.error) throw appResult.error;
 
-    // Show Thank You page
-    alert("We have received your application. We will reach out to you shortly.")
+    // Show SweetAlert instead of alert()
+    Swal.fire({
+      title: "Application Received!",
+      html: `We will reach out to you shortly.<br><br> 
+             Till then, join the <a href="https://chat.whatsapp.com/JEwNKD4Q1yADCI3Na9CZuT" target="_blank" class="my-swal-link" >WhatsApp Group</a> for updates.`,
+      icon: "success",
+      confirmButtonText: "OK",
+      customClass: {
+        popup: "my-swal-popup",
+        title: "my-swal-title",
+        confirmButton: "my-swal-button",
+      }
+    });
 
     // Clear saved form progress
     localStorage.removeItem('recruitmentFormProgress');
