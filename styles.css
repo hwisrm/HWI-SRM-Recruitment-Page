@@ -471,7 +471,7 @@ select {
 }
 
 .thank-you-page {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -480,6 +480,10 @@ select {
     position: relative;
     overflow: hidden;
     transition: transform 0.8s ease-out;
+}
+
+#thank-you-page.active {
+    display: block !important;
 }
 
 @media (max-width: 768px) {
