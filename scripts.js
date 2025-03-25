@@ -299,7 +299,7 @@ function initializeEmailValidation() {
 function initializeLinkValidation() {
     const linkInputs = {
         'githubLink': document.getElementById('githubLink'),
-        'linkedinLink': document.getElementById('linkedinLink'),
+        // 'linkedinLink': document.getElementById('linkedinLink'),
         'instagramLink': document.getElementById('instagramLink'),
         'xLink': document.getElementById('xLink'),
         'portfolioLink': document.getElementById('portfolioLink'),
@@ -311,7 +311,7 @@ function initializeLinkValidation() {
     
     const linkErrors = {
         'githubLink': document.getElementById('githubLinkError'),
-        'linkedinLink': document.getElementById('linkedinLinkError'),
+        // 'linkedinLink': document.getElementById('linkedinLinkError'),
         'instagramLink': document.getElementById('instagramLinkError'),
         'xLink': document.getElementById('xLinkError')
     };

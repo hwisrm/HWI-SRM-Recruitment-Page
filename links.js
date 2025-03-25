@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const githubLinkInput = document.getElementById('githubLink');
-    const linkedinLinkInput = document.getElementById('linkedinLink');
+    // const linkedinLinkInput = document.getElementById('linkedinLink');
     const githubLinkError = document.getElementById('githubLinkError');
-    const linkedinLinkError = document.getElementById('linkedinLinkError');
+    // const linkedinLinkError = document.getElementById('linkedinLinkError');
 
     const allowedDomains = ['github.com', 'linkedin.com', 'instagram.com', 'x.com'];
 
@@ -32,15 +32,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     githubLinkInput.addEventListener('blur', () => validateLink(githubLinkInput, githubLinkError));
-    linkedinLinkInput.addEventListener('blur', () => validateLink(linkedinLinkInput, linkedinLinkError));
+    // linkedinLinkInput.addEventListener('blur', () => validateLink(linkedinLinkInput, linkedinLinkError));
 
     // Validate on form submission
     const form = document.querySelector('form');
     form.addEventListener('submit', function (event) {
         validateLink(githubLinkInput, githubLinkError);
-        validateLink(linkedinLinkInput, linkedinLinkError);
+        // validateLink(linkedinLinkInput, linkedinLinkError);
 
-        if (!githubLinkInput.checkValidity() || !linkedinLinkInput.checkValidity()) {
+        if (!githubLinkInput.checkValidity()) {
             event.preventDefault(); // Prevent form submission if links are invalid
         }
     });
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     linkedinInput.addEventListener('blur', function () {
-        validateLink(linkedinInput, linkedinError, ['linkedin.com']);
+        // validateLink(linkedinInput, linkedinError, ['linkedin.com']);
     });
 
     twitterInput.addEventListener('blur', function () {
@@ -194,12 +194,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Validate on form submission
     const form = document.querySelector('form');
     form.addEventListener('submit', function (event) {
-        validateLink(linkedinInput, linkedinError, ['linkedin.com']);
+        // validateLink(linkedinInput, linkedinError, ['linkedin.com']);
         validateLink(twitterInput, twitterError, ['x.com', 'twitter.com']);
         validateLink(instagramInput, instagramError, ['instagram.com']);
 
-        if (!linkedinInput.checkValidity() || 
-            !twitterInput.checkValidity() || 
+        if (!twitterInput.checkValidity() || 
             !instagramInput.checkValidity()) {
             event.preventDefault(); // Prevent form submission if any input is invalid
         }
